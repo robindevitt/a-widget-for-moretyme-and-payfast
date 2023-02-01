@@ -45,7 +45,7 @@ function options_page_content() {
 
 		echo '<div class="moretyme-preview">';
 			echo '<p class="row"><strong>' . esc_html__( 'Save your settings will update the preview. You can use the option, enabled for admins only, to preview the widget before making is public.', 'moretyme-for-payfast' ) . '</strong></p>';
-			echo MoretymeWidget\moretyme_widget_generate( '1500.00' );
+			echo MoretymeWidget\moretyme_widget_generate( '1200.00' );
 		echo '</div>'; // preview ends.
 	echo '</div>'; // Wrap ends.
 }
