@@ -1,2 +1,2 @@
-# moretyme-for-payfast
-MoreTyme Widget for Payfast.
+# MoreTyme Widget for Payfast
+Boost sales on your website by implementing a personalised widget for your product pages. This widget will provide your customers with the amount they are required to pay upfront and for the next two payments with MoreTyme.
