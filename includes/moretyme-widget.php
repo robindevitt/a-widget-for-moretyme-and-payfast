@@ -57,17 +57,21 @@ function moretyme_widget_generate( string $amount = '0' ) {
 	if ( isset( $url_options['payfast_logo'] ) ) {
 		$script .= '&logo-type=' . $url_options['payfast_logo'];
 	}
-	if ( isset( $url_options['colors']['font_color'] ) ) {
-		$custom_css .= 'color:' . $url_options['colors']['font_color'] . '!important;';
-		$script     .= '&font-color=' . $url_options['colors']['font_color'];
-	}
-	if ( isset( $url_options['colors']['link_color'] ) ) {
-		$custom_link_css = '#moretyme_widget_wrapper .moretyme__cont a{color:' . $url_options['colors']['link_color'] . '!important;}';
-		$script         .= '&link-color=' . $url_options['colors']['link_color'];
-	}
-	if ( isset( $url_options['colors']['background_color'] ) ) {
-		$custom_css .= 'background-color:' . $url_options['colors']['background_color'] . ';';
-	}
+
+	// Set the font colour, if the option isn't set use the default.
+	$font_color  = ( isset( $url_options['colors']['font_color'] ) ? $url_options['colors']['font_color'] : '#fffff' );
+	$custom_css .= 'color:' . $font_color . '!important;';
+	$script     .= '&font-color=' . $font_color;
+
+	// Set the link colour, if the option isn't set use the default.
+	$link_color      = ( isset( $url_options['colors']['link_color'] ) ? $url_options['colors']['link_color'] : '#e8f278' );
+	$custom_link_css = '#moretyme_widget_wrapper .moretyme__cont a{color:' . $link_color . '!important;}';
+	$script         .= '&link-color=' . $link_color;
+
+	// Set the background colour, if the option isn't set use the default.
+	$background_color = ( isset( $url_options['colors']['background_color'] ) ? $url_options['colors']['background_color'] : '#022d2d' );
+	$custom_css      .= 'background-color:' . $background_color . ';';
+
 	if ( isset( $url_options['padding'] ) ) {
 		$custom_css .= 'padding:' . $url_options['padding'] . 'px !important;';
 	}

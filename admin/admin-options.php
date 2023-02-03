@@ -79,19 +79,19 @@ function moretyme_colors() {
 
 	$color_options = array(
 		array(
-			'label'   => __( 'Font colour', 'moretyme-for-payfast' ),
+			'label'   => __( 'Font Colour', 'moretyme-for-payfast' ),
 			'key'     => 'font_color',
-			'default' => '#022d2d',
+			'default' => '#ffffff',
 		),
 		array(
-			'label'   => __( 'Link colour', 'moretyme-for-payfast' ),
+			'label'   => __( 'Link Colour', 'moretyme-for-payfast' ),
 			'key'     => 'link_color',
-			'default' => '#022d2d',
+			'default' => '#e8f278',
 		),
 		array(
-			'label'   => __( 'Background colour', 'moretyme-for-payfast' ),
+			'label'   => __( 'Background Colour', 'moretyme-for-payfast' ),
 			'key'     => 'background_color',
-			'default' => '',
+			'default' => '#022d2d',
 		),
 	);
 
