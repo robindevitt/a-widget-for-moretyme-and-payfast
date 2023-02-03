@@ -9,9 +9,10 @@ namespace MoreTymeForPayfast\MoretymeWidget;
 
 use WC_Product_Variation;
 
-$options = get_option( 'moretyme_options' );
+$options         = get_option( 'moretyme_options' );
+$widget_position = ( $options && isset( $options['position'] ) ? $options['position'] : 'woocommerce_single_product_summary' );
 
-add_action( $options['position'], 'MoreTymeForPayfast\MoretymeWidget\add_the_widget' );
+add_action( $widget_position, 'MoreTymeForPayfast\MoretymeWidget\add_the_widget' );
 
 /**
  * Functions to show the widget.
@@ -22,7 +23,7 @@ function add_the_widget() {
 	if ( ! is_object( $product ) ) {
 		$product = wc_get_product( get_the_ID() );
 	}
-	echo esc_html( moretyme_widget_generate( $product->get_price() ) );
+	echo moretyme_widget_generate( $product->get_price() );
 }
 
 /**
@@ -45,9 +46,11 @@ function moretyme_widget_generate( string $amount = '0' ) {
 
 	$custom_css      = '#moretyme_widget_wrapper{width:100%}#moretyme_widget_wrapper .moretyme__cont{';
 	$custom_link_css = '';
-	if ( isset( $url_options['font'] ) ) {
-		$script .= '&font=' . $url_options['font'];
-	}
+
+	// Set the default font.
+	$font    = ( isset( $url_options['font'] ) ? $url_options['font'] : 'Arial' );
+	$script .= '&font=' . $font;
+
 	if ( isset( $url_options['widget_size'] ) ) {
 		$script .= '&size=' . $url_options['widget_size'];
 	}
@@ -72,9 +75,8 @@ function moretyme_widget_generate( string $amount = '0' ) {
 	$background_color = ( isset( $url_options['colors']['background_color'] ) ? $url_options['colors']['background_color'] : '#022d2d' );
 	$custom_css      .= 'background-color:' . $background_color . ';';
 
-	if ( isset( $url_options['padding'] ) ) {
-		$custom_css .= 'padding:' . $url_options['padding'] . 'px !important;';
-	}
+	$padding     = ( isset( $url_options['padding'] ) ? $url_options['padding'] : '10' );
+	$custom_css .= 'padding:' . $padding . 'px !important;';
 
 	$custom_css .= '}';
 	$html        = '<div class="moretyme_widget_wrapper"><div id="moretyme_widget_wrapper" class="moretyme__cont">';

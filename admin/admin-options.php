@@ -210,9 +210,7 @@ function moretyme_mode() {
  */
 function moretyme_padding() {
 	$options = moretyme_options( 'padding' );
-
-	$value = ( ! empty( $options ) ? $options : '0' );
-
+	$value   = ( $options ? $options : '10' );
 	echo '<div class="slidecontainer">';
 		echo '<input type="range" name="moretyme_options[padding]" min="0" max="30" value="' . esc_attr( $value ) . '" class="slider" id="moretymePadding"><div id="demo"></div>';
 	echo '</div>';
