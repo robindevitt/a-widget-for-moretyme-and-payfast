@@ -16,37 +16,42 @@ function options_page_content() {
 		return;
 	}
 
-	if ( isset( $_GET['settings-updated'] ) ) {
+	if ( isset( $_GET['settings-updated'] ) ) { // phpcs:ignore
 		// add settings saved message with the class of "updated".
-		add_settings_error( 'moretyme_message', 'moretyme_message', __( 'Settings Saved', 'rbd' ), 'updated' );
+		add_settings_error( 'moretyme_message', 'moretyme_message', __( 'Settings Saved', 'moretyme' ), 'updated' );
 	}
 
 	// show error/update messages.
 	settings_errors( 'moretyme_message' );
 
+	// Setup the allowed HTML so scripts and dics are rendered.
+	$allowed_html = array(
+		'div'    => array(
+			'class' => true,
+			'id'    => true,
+		),
+		'script' => array(
+			'async' => true,
+			'src'   => true,
+			'type'  => 'text/javascript',
+		),
+	);
+
 	echo '<div class="wrap">';
+
 		echo '<h1>' . esc_html( get_admin_page_title() ) . '</h1>';
 
 		echo '<form class="row" action="options.php" method="post">';
 			settings_fields( 'moretyme_settings' );
-			register_setting(
-				__FILE__,
-				'moretyme_options',
-				array(
-					'string',
-					'validate_options',
-				)
-			); // option group, option name, sanitize cb.
-
 			do_settings_sections( 'moretyme_settings' );
-
 			submit_button( 'Save Settings' );
 		echo '</form>';
 
 		echo '<div class="moretyme-preview">';
 			echo '<p class="row"><strong>' . esc_html__( 'Save your settings will update the preview. You can use the option, enabled for admins only, to preview the widget before making is public.', 'moretyme-for-payfast' ) . '</strong></p>';
-			echo MoretymeWidget\moretyme_widget_generate( '1200.00' );
-		echo '</div>'; // preview ends.
+
+			echo wp_kses( MoretymeWidget\moretyme_widget_generate( '1200.00' ), $allowed_html );
+		echo '</div>'; // moretyme-preview ends.
 	echo '</div>'; // Wrap ends.
 }
 
@@ -210,7 +215,7 @@ function moretyme_mode() {
  */
 function moretyme_padding() {
 	$options = moretyme_options( 'padding' );
-	$value   = ( $options ? $options : '10' );
+	$value   = ( isset( $options ) ? $options : '10' );
 	echo '<div class="slidecontainer">';
 		echo '<input type="range" name="moretyme_options[padding]" min="0" max="30" value="' . esc_attr( $value ) . '" class="slider" id="moretymePadding"><div id="demo"></div>';
 	echo '</div>';

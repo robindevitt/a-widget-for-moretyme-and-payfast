@@ -23,7 +23,18 @@ function add_the_widget() {
 	if ( ! is_object( $product ) ) {
 		$product = wc_get_product( get_the_ID() );
 	}
-	echo moretyme_widget_generate( $product->get_price() );
+	$allowed_html = array(
+		'script' => array(
+			'type'  => 'text/javascript',
+			'async' => true,
+			'src'   => true,
+		),
+		'div'    => array(
+			'class' => true,
+			'id'    => true,
+		),
+	);
+	echo wp_kses( moretyme_widget_generate( $product->get_price() ), $allowed_html );
 }
 
 /**
@@ -40,7 +51,7 @@ function moretyme_widget_generate( string $amount = '0' ) {
 	}
 
 	// Ignore the next line to prevent an error for the script being inline, it needs to be inline to return the HTML for the widget.
-	$script  = '<script async src="https://content.payfast.co.za/widgets/moretyme/widget.min.js?'; // phpcs:ignore
+	$script  = '<script type="text/javascript" async src="https://content.payfast.co.za/widgets/moretyme/widget.min.js?'; // phpcs:ignore
 	$script .= 'amount=' . $amount;
 	$script .= '&theme=dark';
 
@@ -80,7 +91,7 @@ function moretyme_widget_generate( string $amount = '0' ) {
 
 	$custom_css .= '}';
 	$html        = '<div class="moretyme_widget_wrapper"><div id="moretyme_widget_wrapper" class="moretyme__cont">';
-	$html       .= $script .= '" type="text/javascript"></script>';
+	$html       .= $script .= '"></script>';
 	$html       .= '</div></div>';
 
 	$custom_css .= $custom_link_css;
@@ -88,7 +99,6 @@ function moretyme_widget_generate( string $amount = '0' ) {
 	wp_register_style( 'moretyme-inline-style', false, '', MORETYME_FOR_PAYFAST_VER );
 	wp_enqueue_style( 'moretyme-inline-style' );
 	wp_add_inline_style( 'moretyme-inline-style', $custom_css );
-	wp_add_inline_script( 'moretyme-inline-script', $script );
 
 	return $html;
 }
