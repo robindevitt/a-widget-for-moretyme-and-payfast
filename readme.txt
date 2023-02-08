@@ -38,8 +38,7 @@ Colours(Font, Link and Background), Toggle if it's shown for users who are Admin
 == Screenshots ==
 
 1. Default Settings page.
-2. Settings page with customized options.
-3. Widget shown "Before Single Product Summary".
+2. Widget shown "Before Single Product Summary".
 
 == Changelog ==
 
