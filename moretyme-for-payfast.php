@@ -70,6 +70,17 @@ function admin_notices() {
 			esc_html__( 'Moretyme for Payfast', 'moretyme-for-payfast' ),
 		);
 	}
+
+	if ( 'ZAR' !== get_woocommerce_currency() ){
+		printf(
+			'<div class="%s"><p><strong>%s</strong>%s<strong>%s</strong>%s</p></div>',
+			'notice notice-error',
+			esc_html__( 'MoreTyme for PayFast', 'moretyme-for-payfast' ),
+			esc_html__( ' only supports the currency of', 'moretyme-for-payfast' ),
+			esc_html__( ' R ( South African Rand )', 'moretyme-for-payfast' ),
+			esc_html__( '.', 'moretyme-for-payfast' ),
+		);
+	}
 }
 
 /**
@@ -95,9 +106,9 @@ function moretyme_style_scripts() {
 		// Add the color picker css file.
 		wp_enqueue_style( 'wp-color-picker' );
 		// Include our custom jQuery file with WordPress Color Picker dependency.
-		wp_enqueue_script( 'wp-color-picker-script', plugins_url( '/assets/js/color-picker.min.js', __FILE__ ), array( 'wp-color-picker' ), MORETYME_FOR_PAYFAST_VER, true );
+		wp_enqueue_script( 'wp-admin-script', plugins_url( '/assets/js/admin.min.js', __FILE__ ), array( 'wp-color-picker' ), MORETYME_FOR_PAYFAST_VER, true );
 	} else {
-		wp_dequeue_script( 'wp-color-picker-script' );
+		wp_dequeue_script( 'wp-admin-script' );
 		wp_dequeue_style( 'wp-color-picker' );
 	}
 }
@@ -107,5 +118,13 @@ function moretyme_style_scripts() {
  */
 function moretyme_product_script() {
 	wp_enqueue_script( 'moretyme-product-script', plugins_url( '/assets/js/product-update.min.js', __FILE__ ), MORETYME_FOR_PAYFAST_VER, true, true );
-	wp_localize_script( 'moretyme-product-script', 'moretyme_ajax_object', array( 'moretyme_ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+	wp_localize_script( 
+		'moretyme-product-script', 
+		'moretyme_ajax_object', 
+		array( 
+			'sym' => get_woocommerce_currency(),
+			'currency' => get_woocommerce_currency_symbol(),
+			'position' => get_option( 'woocommerce_currency_pos' )
+		)
+	);
 }

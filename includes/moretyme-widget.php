@@ -51,7 +51,7 @@ function moretyme_widget_generate( string $amount = '0' ) {
 	}
 
 	// Ignore the next line to prevent an error for the script being inline, it needs to be inline to return the HTML for the widget.
-	$script  = '<script type="text/javascript" async src="https://content.payfast.co.za/widgets/moretyme/widget.min.js?'; // phpcs:ignore
+	$script  = '<script type="text/javascript" async src="https://content.payfast.io/widgets/moretyme/widget.min.js?'; // phpcs:ignore
 	$script .= 'amount=' . $amount;
 	$script .= '&theme=dark';
 
@@ -72,19 +72,24 @@ function moretyme_widget_generate( string $amount = '0' ) {
 		$script .= '&logo-type=' . $url_options['payfast_logo'];
 	}
 
-	// Set the font colour, if the option isn't set use the default.
-	$font_color  = ( isset( $url_options['colors']['font_color'] ) ? $url_options['colors']['font_color'] : '#fffff' );
-	$custom_css .= 'color:' . $font_color . '!important;';
-	$script     .= '&font-color=' . $font_color;
+	if( 'custom' !== $url_options['mode'] ){
+		$script .= '&theme=' . $url_options['mode'];
+	} else {
+		// Set the font colour, if the option isn't set use the default.
+		$font_color  = ( isset( $url_options['colors']['font_color'] ) ? $url_options['colors']['font_color'] : '#fffff' );
+		$custom_css .= 'color:' . $font_color . '!important;';
+		$script     .= '&font-color=' . $font_color;
 
-	// Set the link colour, if the option isn't set use the default.
-	$link_color      = ( isset( $url_options['colors']['link_color'] ) ? $url_options['colors']['link_color'] : '#e8f278' );
-	$custom_link_css = '#moretyme_widget_wrapper .moretyme__cont a{color:' . $link_color . '!important;}';
-	$script         .= '&link-color=' . $link_color;
+		// Set the link colour, if the option isn't set use the default.
+		$link_color      = ( isset( $url_options['colors']['link_color'] ) ? $url_options['colors']['link_color'] : '#e8f278' );
+		$custom_link_css = '#moretyme_widget_wrapper .moretyme__cont a{color:' . $link_color . '!important;}';
+		$script         .= '&link-color=' . $link_color;
 
-	// Set the background colour, if the option isn't set use the default.
-	$background_color = ( isset( $url_options['colors']['background_color'] ) ? $url_options['colors']['background_color'] : '#022d2d' );
-	$custom_css      .= 'background-color:' . $background_color . ';';
+		// Set the background colour, if the option isn't set use the default.
+		$background_color = ( isset( $url_options['colors']['background_color'] ) ? $url_options['colors']['background_color'] : '#022d2d' );
+		$custom_css      .= 'background-color:' . $background_color . ';';
+
+	}
 
 	$padding     = ( isset( $url_options['padding'] ) ? $url_options['padding'] : '10' );
 	$custom_css .= 'padding:' . $padding . 'px !important;';

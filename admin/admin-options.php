@@ -194,8 +194,9 @@ function moretyme_logo_alignment() {
 function moretyme_mode() {
 	$options = moretyme_options( 'mode' );
 	$modes   = array(
-		'light' => __( 'Light', 'moretyme-for-payfast' ),
-		'dark'  => __( 'Dark', 'moretyme-for-payfast' ),
+		'light'  => __( 'Light', 'moretyme-for-payfast' ),
+		'dark'   => __( 'Dark', 'moretyme-for-payfast' ),
+		'custom' => __( 'Custom', 'moretyme-for-payfast' ),
 	);
 
 	echo '<select id="moretyme_mode" name="moretyme_options[mode]">';
@@ -229,7 +230,7 @@ function moretyme_padding() {
 function moretyme_payfast_logo() {
 	$options              = moretyme_options( 'payfast_logo' );
 	$payfast_logo_options = array(
-		'red'   => __( 'Red', 'moretyme-for-payfast' ),
+		''   => __( 'Green', 'moretyme-for-payfast' ),
 		'white' => __( 'White', 'moretyme-for-payfast' ),
 	);
 	echo '<select id="payfast_logo" name="moretyme_options[payfast_logo]">';

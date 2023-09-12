@@ -9,7 +9,7 @@ jQuery( ".single_variation_wrap" ).on(
 	function (event, variation) {
 		var amount = parseFloat( variation.display_price ) / parseFloat( 3 );
 		jQuery( "#moretyme_widget_wrapper .moretyme__amount" ).text(
-			"R " + amount.toFixed( 2 )
+			moretyme_ajax_object.currency + amount.toFixed( 2 )
 		);
 	}
 );

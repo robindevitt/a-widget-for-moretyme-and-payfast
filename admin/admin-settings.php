@@ -54,14 +54,15 @@ function moretyme_settings() {
 	);
 
 	$settings = array(
-		'moretyme_colors'          => 'Colours',
-		'moretyme_admin_only'      => 'Enabled for admins only',
-		'moretyme_font'            => 'Font',
-		'moretyme_logo_alignment'  => 'Logo Alignment',
-		'moretyme_padding'         => 'Padding',
-		'moretyme_payfast_logo'    => 'Payfast Logo Type',
-		'moretyme_widget_position' => 'Widget Position',
-		'moretyme_widget_size'     => 'Widget Size',
+		'moretyme_mode'            => __( 'Mode /Colours', 'moretyme-for-payfast' ),
+		'moretyme_colors'          => '',
+		'moretyme_admin_only'      => __( 'Enabled for admins only', 'moretyme-for-payfast' ),
+		'moretyme_font'            => __( 'Font', 'moretyme-for-payfast' ),
+		'moretyme_logo_alignment'  => __( 'Logo Alignment', 'moretyme-for-payfast' ),
+		'moretyme_padding'         => __( 'Padding', 'moretyme-for-payfast' ),
+		'moretyme_payfast_logo'    => __( 'Payfast Logo Type', 'moretyme-for-payfast' ),
+		'moretyme_widget_position' => __( 'Widget Position', 'moretyme-for-payfast' ),
+		'moretyme_widget_size'     => __( 'Widget Size', 'moretyme-for-payfast' ),
 	);
 
 	foreach ( $settings as $key => $value ) {
